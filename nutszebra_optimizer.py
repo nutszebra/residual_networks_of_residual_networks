@@ -352,7 +352,7 @@ class OptimizerStochasticDepth(Optimizer):
 class OptimizerResnetOfResnet(Optimizer):
 
     def __init__(self, model=None, lr=0.1, momentum=0.9, schedule=(250, 375), weight_decay=1.0e-4):
-        super(OptimizerStochasticDepth, self).__init__(model)
+        super(OptimizerResnetOfResnet, self).__init__(model)
         self.lr = lr
         self.momentum = momentum
         self.schedule = schedule
