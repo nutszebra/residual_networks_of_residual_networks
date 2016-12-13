@@ -109,7 +109,6 @@ class BN_ReLU_Conv_BN_ReLU_Conv(nutszebra_chainer.Model):
                 h = h + self.concatenate_zero_pad(self.maybe_pooling(x), h.data.shape, h.volatile, type(h.data))
             else:
                 # downsampling
-                print(x.data.shape)
                 h = h + self['projection'](x, train=train)
             return h
 
@@ -150,8 +149,6 @@ class ResBlock(nutszebra_chainer.Model):
             h = self['block{}'.format(i)](h, train)
         batch, ch, height, width = h.data.shape
         _, _, height_x, width_x = x.data.shape
-        print(h.data.shape)
-        print(x.data.shape)
         stride = (int(height_x / height), int(width_x / width))
         self['projection'].conv.stride = stride
         return h + self['projection'](x, train)
