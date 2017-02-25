@@ -151,7 +151,9 @@ class ResBlock(nutszebra_chainer.Model):
         _, _, height_x, width_x = x.data.shape
         stride = (int(height_x / height), int(width_x / width))
         self['projection'].conv.stride = stride
-        return h + self['projection'](x, train)
+        x = self['projection'](x, train)
+        h = self.block0.concatenate_zero_pad(h, x.data.shape, x.volatile, type(x.data))
+        return h + x
 
 
 class ResnetOfResnet(nutszebra_chainer.Model):
